@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import vo.Board;
+import vo.Member;
 
 public class BoardDao {
 	//수정 
@@ -21,11 +22,12 @@ public class BoardDao {
 	}	
 	
 	//삭제 
-	public int deleteBoard(Connection conn, int boardNo) throws Exception {
+	public int deleteBoard(Connection conn, int boardNo, Member member) throws Exception {
 	int result = 0;	
-	String sql = "DELETE FROM board WHERE board_no = ?";
+	String sql = "DELETE FROM board WHERE board_no = ? and member_id = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setInt(1, boardNo);
+	stmt.setString(2, member.getMemberId());
 	result = stmt.executeUpdate();
 	return result;
 	}

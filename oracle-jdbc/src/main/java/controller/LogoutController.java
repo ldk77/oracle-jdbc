@@ -17,5 +17,7 @@ public class LogoutController extends HttpServlet {
 		 *  redirect -> get방식 /home 컨트롤러 요청
 		 * 
 		 * */
+		request.getSession().invalidate();
+		response.sendRedirect(request.getContextPath()+"/member/login");
 	}
 }

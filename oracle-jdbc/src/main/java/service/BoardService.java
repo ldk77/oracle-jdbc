@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import dao.BoardDao;
 import util.DBUtil;
 import vo.Board;
+import vo.Member;
 
 public class BoardService {
 	private BoardDao boardDao;
@@ -43,13 +44,13 @@ public class BoardService {
 		return list;
 	}
 	//삭제 
-	public int deleteBoard(int boardNo) {
+	public int deleteBoard(int boardNo, Member member) {
 		int result = 0;
 		Connection conn = null; 
 		boardDao = new BoardDao();		
 		try {
 			conn = DBUtil.getConnection();
-			result = boardDao.deleteBoard(conn, boardNo);
+			result = boardDao.deleteBoard(conn, boardNo, member);
 			conn.commit();
 		} catch (Exception e) {
 			try {
