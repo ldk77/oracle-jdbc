@@ -49,16 +49,17 @@ public class BoardDao {
 	}
 	
 	// 페이징
-	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow) throws Exception {
+	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow, String searchTitle) throws Exception {
 		ArrayList<Board> list = new ArrayList<Board>();
 		String sql = "SELECT board_no boardNo, board_title boardTitle, createdate"
 				+ " FROM (SELECT rownum rnum, board_no, board_title, createdate"
 				+ "			FROM (SELECT board_no, board_title, createdate"
-				+ "					FROM board ORDER BY board_no DESC))"
-				+ " WHERE rnum BETWEEN ? AND ?"; // WHERE rnum >=? AND rnum <=?;
+				+ "					FROM board ORDER BY TO_NUMBER(board_no) DESC))"
+				+ " WHERE rnum BETWEEN ? AND ? AND board_title LIKE ? "; // WHERE rnum >=? AND rnum <=?;
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, endRow);
+		stmt.setString(3, "%" + searchTitle + "%");
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			Board b = new Board();
@@ -79,5 +80,7 @@ public class BoardDao {
 		stmt.setString(2, board.getBoardContent());		
 		result = stmt.executeUpdate();
 		return result;
-	}
+	}	
+	
+
 }

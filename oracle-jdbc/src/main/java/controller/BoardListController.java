@@ -39,11 +39,17 @@ public class BoardListController extends HttpServlet {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
 		}
 		
+		String searchTitle = "";
+		if(request.getParameter("searchTitle") != null) {
+			searchTitle = request.getParameter("searchTitle");		
+		}
+		
 		this.boardService = new BoardService();
-		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage);
+		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage, searchTitle);
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage); // view에서 필요
 		request.setAttribute("rowPerPage", rowPerPage); // view에서 필요
+		request.setAttribute("searchTitle", searchTitle);
 		
 		/*
 		 * 1) 글입력 

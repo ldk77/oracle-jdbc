@@ -10,6 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script>
+         $(document).ready(function() {
+            $('#rowPerPage').change(function() {
+               $('#pageForm').submit();
+            })
+         });
+    </script>
     <style>
 	table {
 	border: 1px #a39485 solid;
@@ -51,7 +58,12 @@
                 <div class="sidebar-brand-text mx-3">ORACLE</div>
             </a>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">    
+            <hr class="sidebar-divider my-0">
+             <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/home">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>HOME</span></a>
+            </li>       
 
      
 
@@ -80,19 +92,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -174,6 +174,9 @@
                 <div class="row">            
 					<!-- 내용입력 -->
 					<form id="pageForm" method="get" action="${pageContext.request.contextPath}/board/boardList">
+						<input type="hidden" name="currentPage" value="${currentPage}">
+						<input type="text" name="searchTitle" value="${searchTitle}">
+						<button type ="submit">검색</button>
 						<select name="rowPerPage" id="rowPerPage">
 							<c:if test="${rowPerPage == 10}">
 								<option value="10" selected="selected">10</option>

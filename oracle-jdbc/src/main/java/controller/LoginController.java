@@ -26,7 +26,8 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		// 로그인 전 : loginMember => null
 		// 로그인 후 : loginMember => not null
-		Member loginMember = (Member)session.getAttribute("loginMembecr");
+		
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) { //이미 로그인 상태 
 			response.sendRedirect(request.getContextPath()+"/home");
 			return;
