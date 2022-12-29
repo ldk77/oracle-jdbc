@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <!DOCTYPE html>
 <html lang="en">
@@ -191,10 +190,12 @@
 						</tr>
 					</table>
 					<div>
+						<c:if test="${board.memberId.equals(loginMember.memberId)}">	
 						<a href="${pageContext.request.contextPath}/board/removeBoard?boardNo=${board.boardNo}" data-toggle="modal" data-target="#deleteModal"> 
                         삭제
                         </a>						
 						<a href='${pageContext.request.contextPath}/board/modifyBoard?boardNo=${board.boardNo}'>수정</a>
+						</c:if>
 					</div>
 				</div>
 			</div>

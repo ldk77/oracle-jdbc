@@ -58,12 +58,12 @@ public class BoardDao {
 		String sql = "SELECT board_no boardNo, board_title boardTitle, createdate"
 				+ " FROM (SELECT rownum rnum, board_no, board_title, createdate"
 				+ "			FROM (SELECT board_no, board_title, createdate"
-				+ "					FROM board ORDER BY TO_NUMBER(board_no) DESC))"
-				+ " WHERE rnum BETWEEN ? AND ? AND board_title LIKE ? "; // WHERE rnum >=? AND rnum <=?;
+				+ "					FROM board WHERE board_title LIKE ? ORDER BY TO_NUMBER(board_no) DESC))"
+				+ " WHERE rnum BETWEEN ? AND ? "; // WHERE rnum >=? AND rnum <=?;
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, beginRow);
-		stmt.setInt(2, endRow);
-		stmt.setString(3, "%" + searchTitle + "%");
+		stmt.setString(1, "%" + searchTitle + "%");
+		stmt.setInt(2, beginRow);
+		stmt.setInt(3, endRow);		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			Board b = new Board();
