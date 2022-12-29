@@ -50,6 +50,8 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("currentPage", currentPage); // view에서 필요
 		request.setAttribute("rowPerPage", rowPerPage); // view에서 필요
 		request.setAttribute("searchTitle", searchTitle);
+		String msg = request.getParameter("msg");
+		request.setAttribute("msg", msg);
 		
 		/*
 		 * 1) 글입력 

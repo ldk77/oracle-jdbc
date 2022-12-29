@@ -22,7 +22,7 @@ public class MemberDao {
 			returnMember.setMemberName(rs.getString("memberName"));
 			returnMember.setCreatedate(rs.getString("createdate"));
 			returnMember.setUpdatedate(rs.getString("updatedate"));
-		}		
+		} 
 		rs.close();
 		stmt.close();
 		
@@ -53,7 +53,7 @@ public class MemberDao {
 	//회원탈퇴 
 	public int deleteMember(Connection conn, Member member) throws Exception{
 		int result = 0; 
-		String sql = "DELETE FROM MEMBER WHERE member_id=? AND member_pw = ?";
+		String sql = "DELETE FROM MEMBER WHERE member_id=? AND member_pw =?";
 		PreparedStatement stmt = conn.prepareStatement(sql);	
 		stmt.setString(1, member.getMemberId());
 		stmt.setString(2, member.getMemberPw());	

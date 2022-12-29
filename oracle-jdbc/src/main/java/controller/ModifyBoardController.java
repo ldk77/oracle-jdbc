@@ -31,7 +31,7 @@ public class ModifyBoardController extends HttpServlet {
 		// 값 받아오기
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		BoardService boardService = new BoardService();
-		Board board = boardService.getBoardOne(boardNo);		
+		Board board = boardService.getBoardOne(boardNo);
 		
 		request.setAttribute("board", board);		
 		request.getRequestDispatcher("/WEB-INF/view/board/modifyBoardForm.jsp").forward(request, response);
@@ -77,7 +77,7 @@ public class ModifyBoardController extends HttpServlet {
 		// 결과
 		if(result == 1) {
 		System.out.println("수정성공");
-		response.sendRedirect(request.getContextPath()+"/board/boardList"); 
+		response.sendRedirect(request.getContextPath()+"/board/boardList?msg="+0); 
 		} else {
 		System.out.println("수정실패");
 		response.sendRedirect(request.getContextPath()+"/board/modifyBoard?boardNo="+boardNo);

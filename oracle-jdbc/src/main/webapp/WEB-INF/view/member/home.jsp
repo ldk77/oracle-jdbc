@@ -10,12 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script>
-         $(document).ready(function() {
-            $('#rowPerPage').change(function() {
-               $('#pageForm').submit();
-            })
-         });
+	<script type="text/javascript">
+		alert("${loginMember.memberName}님 환영합니다");
     </script>
     <style>
 	table {

@@ -52,7 +52,7 @@ public class AddMemberController extends HttpServlet {
 		MemberService memberService = new MemberService();
 		result = memberService.insertMember(member);
 		if(result == 1 ){//회원가입성공
-			response.sendRedirect(request.getContextPath()+"/member/login");
+			response.sendRedirect(request.getContextPath()+"/member/login?msg="+1);
 			System.out.println("회원가입성공");
 		} else { //회원가입실패 
 			response.sendRedirect(request.getContextPath()+"/member/addMeber");

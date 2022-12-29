@@ -38,7 +38,7 @@ public class RemoveBoardController extends HttpServlet {
 		// 결과
 		if(result == 1) {			
 			System.out.println("삭제성공");
-			response.sendRedirect(request.getContextPath()+"/board/boardList"); 
+			response.sendRedirect(request.getContextPath()+"/board/boardList?msg="+1); 
 		} else {			
 			System.out.println("삭제실패");
 			response.sendRedirect(request.getContextPath()+"/board/boardOne?boardNo="+boardNo);

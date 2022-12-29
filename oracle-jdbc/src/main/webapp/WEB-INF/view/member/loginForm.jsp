@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,17 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet">
+
+<c:if test="${msg==0}">	
+	<script type="text/javascript">
+		alert("아이디와 비밀번호를 확인하세요");
+    </script>
+</c:if>
+<c:if test="${msg==1}">	
+	<script type="text/javascript">
+		alert("회원이 되신걸 축하드립니다.");
+    </script>
+</c:if>
 
 </head>
 

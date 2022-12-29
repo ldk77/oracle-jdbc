@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Ref;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,9 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/home");
 			return;
 		}
+		String msg = request.getParameter("msg");
+		request.setAttribute("msg", msg);
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
 	}
 	
@@ -50,7 +55,7 @@ public class LoginController extends HttpServlet {
 			if(loginMember != null) { //이미 로그인 상태 
 				response.sendRedirect(request.getContextPath()+"/home");
 				return;
-			}
+			} 
 			
 			String memberId = request.getParameter("memberId"); 
 			String memberPw = request.getParameter("memberPw");
@@ -63,7 +68,7 @@ public class LoginController extends HttpServlet {
 			Member returnMember = memberService.loginService(paramMember);
 			
 			if(returnMember == null) { //로그인 실패 
-				response.sendRedirect(request.getContextPath()+"/member/login");
+				response.sendRedirect(request.getContextPath()+"/member/login?msg="+0);				
 				return; 
 			}
 			

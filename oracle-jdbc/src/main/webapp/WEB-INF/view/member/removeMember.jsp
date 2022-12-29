@@ -163,7 +163,7 @@
 						<tr>
 							<td>아이디</td>
 							<td>
-								<input type="text" name="memberId">
+								<input type="text" name="memberId" value="${loginMember.memberId}" readonly ="readonly">
 							</td>
 							</tr>
 							<tr>

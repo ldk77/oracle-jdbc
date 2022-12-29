@@ -46,7 +46,12 @@ public class RemoveMemberController extends HttpServlet {
 			return;
 			}			
 			String memberId = request.getParameter("memberId");
-			String memberPw = request.getParameter("memberPw");			
+			String memberPw = request.getParameter("memberPw");		
+			//디버깅
+			System.out.println(memberId);
+			System.out.println(memberPw);
+			
+			//저장
 			Member member = new Member();
 			member.setMemberId(memberId);		
 			member.setMemberPw(memberPw);
@@ -54,6 +59,8 @@ public class RemoveMemberController extends HttpServlet {
 			//모델호출 
 			MemberService memberService = new MemberService();
 			result = memberService.removeMember(member);
+			//디버깅
+			System.out.println(result);
 			if(result == 1 ){//회원탈퇴성공
 				response.sendRedirect(request.getContextPath()+"/member/logout");
 				System.out.println("회원탈퇴성공");

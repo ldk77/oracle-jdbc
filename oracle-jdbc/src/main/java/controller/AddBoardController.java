@@ -59,9 +59,9 @@ public class AddBoardController extends HttpServlet {
 		BoardService boardService = new BoardService();
 		result = boardService.insertBoard(board);
 		
-		   if(result == 1 ){ 		 
-		         response.sendRedirect(request.getContextPath()+"/board/boardList");
-		   } else {
+		   if(result == 1 ){//성공 		 
+		         response.sendRedirect(request.getContextPath()+"/board/boardList?msg="+2);
+		   } else {//실패
 			   response.sendRedirect(request.getContextPath()+"/board/addBoard");
 		   }	
 	}
