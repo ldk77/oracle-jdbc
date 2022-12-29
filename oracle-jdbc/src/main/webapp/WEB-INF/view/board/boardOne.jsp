@@ -171,9 +171,29 @@
 								${board.boardContent}
 							</td>
 						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>
+								${board.memberId}
+							</td>
+						</tr>
+						<tr>
+							<th>작성일</th>
+							<td>
+								${board.createdate}
+							</td>
+						</tr>
+							<tr>
+							<th>마지막수정일</th>
+							<td>
+								${board.updatedate}
+							</td>
+						</tr>
 					</table>
 					<div>
-						<a href='${pageContext.request.contextPath}/board/removeBoard?boardNo=${board.boardNo}'>삭제</a>
+						<a href="${pageContext.request.contextPath}/board/removeBoard?boardNo=${board.boardNo}" data-toggle="modal" data-target="#deleteModal"> 
+                        삭제
+                        </a>						
 						<a href='${pageContext.request.contextPath}/board/modifyBoard?boardNo=${board.boardNo}'>수정</a>
 					</div>
 				</div>
@@ -185,7 +205,25 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
+	<!-- delete Modal -->
+	 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">정말로 삭제하시겠습니까?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">작성자 본인만 삭제를 할수있습니다. 게시글 삭제를 원하시면 "삭제" 그렇지 않으면 "취소"를 눌러주세요</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/board/removeBoard?boardNo=${board.boardNo}">삭제</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

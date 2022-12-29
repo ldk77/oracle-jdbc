@@ -10,13 +10,14 @@ import vo.Member;
 
 public class BoardDao {
 	//수정 
-	public int updateBoard(Connection conn, Board board) throws Exception {
+	public int updateBoard(Connection conn, Board board, Member member) throws Exception {
 		int result = 0;
-		String sql = "update board SET board_title =?, board_content=? WHERE board_no=?";
+		String sql = "update board SET board_title =?, board_content=? WHERE board_no=? and member_id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, board.getBoardTitle());
 		stmt.setString(2, board.getBoardContent());	
 		stmt.setInt(3, board.getBoardNo());
+		stmt.setString(4, member.getMemberId());
 		result = stmt.executeUpdate();
 		return result;
 	}	
@@ -35,7 +36,7 @@ public class BoardDao {
 	// 상세보기 
 	public Board selectBoardOne(Connection conn, int boardNo) throws Exception {
 		Board board = new Board();
-		String sql = "SELECT board_no boardNo, board_title boardTitle, board_content boardContent FROM board WHERE board_no = ?";
+		String sql = "SELECT board_no boardNo, board_title boardTitle, board_content boardContent,createdate,updatedate,member_id memberId FROM board WHERE board_no = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, boardNo);
 		ResultSet rs = stmt.executeQuery();
@@ -43,6 +44,9 @@ public class BoardDao {
 			board.setBoardNo(rs.getInt("boardNo"));
 			board.setBoardTitle(rs.getString("boardTitle"));
 			board.setBoardContent(rs.getString("boardContent"));
+			board.setCreatedate(rs.getString("createdate"));
+			board.setUpdatedate(rs.getString("updatedate"));
+			board.setMemberId(rs.getString("memberId"));
 		}
 		return board;
 		
@@ -74,10 +78,11 @@ public class BoardDao {
 	public int insertBoard(Connection conn, Board board) throws Exception {
 		int result = 0;
 		String sql = "	insert into board(board_no, board_title, board_content, member_id, updatedate, createdate) "
-				+ "values (board_seq.nextval, ? , ?, 'goodee', sysdate, sysdate)";
+				+ "values (board_seq.nextval, ? , ?, ?, sysdate, sysdate)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, board.getBoardTitle());
-		stmt.setString(2, board.getBoardContent());		
+		stmt.setString(2, board.getBoardContent());
+		stmt.setString(3, board.getMemberId());
 		result = stmt.executeUpdate();
 		return result;
 	}	

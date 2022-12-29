@@ -94,13 +94,13 @@ public class BoardService {
 	return result;
 	}
 	// 수정 
-	public int updateBoard(Board board) {
+	public int updateBoard(Board board, Member member) {
 		int result = 0;
 		Connection conn = null;
 		boardDao = new BoardDao();
 	try {
 		conn = DBUtil.getConnection();		
-		result = boardDao.updateBoard(conn, board);
+		result = boardDao.updateBoard(conn, board, member);
 		conn.commit(); 
 	} catch (Exception e) {
 		try {

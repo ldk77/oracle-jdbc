@@ -37,12 +37,22 @@ public class AddBoardController extends HttpServlet {
 			System.out.println("내용을 입력하세요");
 			return;
 		}
+		// 로그인 후에만 진입가능 
+		HttpSession session = request.getSession();
+		// 로그인 전 : loginMember => null
+		// 로그인 후 : loginMember => not null
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) { //이미 로그인 상태 
+			response.sendRedirect(request.getContextPath()+"/member/login");
+			return;
+		}
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		Board board = new Board();
 		board.setBoardContent(content);
 	   	board.setBoardTitle(title);
+	   	board.setMemberId(loginMember.getMemberId());
 	   	
 		int result = 0; 
 		//모델호출 

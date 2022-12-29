@@ -167,7 +167,7 @@
 								<input type="text" name="memberId" value="${loginMember.memberId}" readonly="readonly">
 							</td>
 						</tr>
-						<tr>
+						<tr> 
 							<th>새이름</th>
 							<td>
 								<input type="text" name="memberName" value="${loginMember.memberName}">

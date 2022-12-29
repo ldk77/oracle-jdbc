@@ -53,6 +53,15 @@ public class ModifyBoardController extends HttpServlet {
 			System.out.println("보드번호를 확인하세요");
 		return;
 		};
+		HttpSession session = request.getSession();
+		// 로그인 전 : loginMember => null
+		// 로그인 후 : loginMember => not null
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember == null) { //이미 로그인 상태 
+			response.sendRedirect(request.getContextPath()+"/member/login");
+			return;
+		}		
+		
 		// 값 받아오기
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String title = request.getParameter("title");
@@ -64,7 +73,7 @@ public class ModifyBoardController extends HttpServlet {
 	   	board.setBoardNo(boardNo);
 		int result = 0;
 		BoardService boardService = new BoardService();
-		result = boardService.updateBoard(board);				
+		result = boardService.updateBoard(board, loginMember);			
 		// 결과
 		if(result == 1) {
 		System.out.println("수정성공");
